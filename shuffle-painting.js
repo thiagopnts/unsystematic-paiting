@@ -17,11 +17,16 @@ function setup(){
 	blockSizeY = img.height/5;
 	var areas = [];
 	var images = [];
-    for (var i = 0; i < img.pixels.length ; i+=4) {
-        var r = Math.floor(Math.random() * img.pixels.length) % (i + 1);
-        var old = img.pixels[i];
-        img.pixels[i] = img.pixels[r];
-        img.pixels[r] = old;
+	for (var x = 0; x < img.width; x+=blockSizeX) {
+	    for(var y = 0; y < img.height; y+=blockSizeX) {
+	        for(var j = 0; j < 8; j++) {
+                var idx = 4 * (x * d) * (y * d) + j;
+                img.pixels[idx] = red(color(random(255)));
+                img.pixels[idx + 1] = blue(color(random(255)));
+                img.pixels[idx + 2] = green(color(random(255)));
+                img.pixels[idx + 3] = alpha(color(random(255)));
+            }
+        }
     }
 
     img.updatePixels();
